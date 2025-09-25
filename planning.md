@@ -6,7 +6,7 @@
 ## plan your database schema
 
 drawsql
-organise the data to have a clear idea of the data you need ot manipulate
+organise the data to have a clear idea of the data you need to manipulate
 
 ## set up your database table using oyur schema
 
