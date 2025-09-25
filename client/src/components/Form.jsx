@@ -11,6 +11,7 @@ export default function BuildForm() {
 
   const [status, setStatus] = useState("");
   const [builds, setBuilds] = useState([]);
+  const [users, setUsers] = useState([]);
 
   function handleInputChange(event) {
     setFormData({ ...formData, [event.target.name]: event.target.value });
@@ -33,6 +34,21 @@ export default function BuildForm() {
     }
 
     fetchBuilds();
+  }, []);
+
+  useEffect(() => {
+    async function fetchUsers() {
+      try {
+        const response = await fetch(
+          "https://week-07-assignment-server.onrender.com/users"
+        );
+        const data = await response.json();
+        setUsers(data);
+      } catch (error) {
+        console.error("Error fetching users:", error);
+      }
+    }
+    fetchUsers();
   }, []);
 
   async function handleSubmit(event) {
@@ -117,14 +133,20 @@ export default function BuildForm() {
           />
 
           <label htmlFor="userId">User ID:</label>
-          <input
-            type="number"
+          <select
             id="userId"
             name="userId"
-            required
             value={formData.userId}
             onChange={handleInputChange}
-          />
+            required
+          >
+            <option value="">Select User</option>
+            {users.map((user) => (
+              <option key={user.id} value={user.id}>
+                {user.user_name}
+              </option>
+            ))}
+          </select>
         </fieldset>
 
         <p>curent value is: {formData.buildName}</p>

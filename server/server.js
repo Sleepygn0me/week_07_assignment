@@ -50,6 +50,16 @@ app.get("/builds-users", async (_, res) => {
   }
 });
 
+app.get("/users", async (req, res) => {
+  try {
+    const data = await db.query(`SELECT id, user_name FROM users;`);
+    res.json(data.rows);
+  } catch (error) {
+    console.error("Error fetching users:", error);
+    res.status(500).json({ success: false, error: error.message });
+  }
+});
+
 //TODO: a route to CREATE data
 app.post("/add-builds", async (req, res) => {
   const { buildName, src, description, level, userId } = req.body;
