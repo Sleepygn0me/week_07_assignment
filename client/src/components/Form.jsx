@@ -18,7 +18,9 @@ export default function BuildForm() {
   useEffect(() => {
     async function fetchBuilds() {
       try {
-        const response = await fetch(`${import.meta.env.VITE_API_URL}/builds`);
+        const response = await fetch(
+          "https://week-07-assignment-server.onrender.com/builds"
+        );
         if (!response.ok) {
           throw new Error("Failed to fetch builds");
         }
@@ -40,7 +42,7 @@ export default function BuildForm() {
 
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/add-builds`,
+        "https://week-07-assignment-server.onrender.com/add-builds",
         {
           method: "POST",
           headers: {
