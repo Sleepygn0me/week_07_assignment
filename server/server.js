@@ -56,11 +56,13 @@ app.post("/add-builds", async (req, res) => {
   const { buildName, src, description, level } = req.body;
   try {
     const query = await db.query(
-      `INSERT INTO builds (build_name, src, description, level,) VALUES
-      ($1, $2, $3, $4);`,
-      [buildName, src, description, level]
+      `INSERT INTO builds (build_name, src, description, level, user_id) VALUES
+      ($1, $2, $3, $4, $1);`,
+      [buildName, src, description, Number(level), userId]
     );
-    res.status(200).json({ success: true });
+    res
+      .status(200)
+      .json({ success: true, message: "Build added successfully!" });
   } catch (error) {
     console.error("Error in the add builds route", error);
     res.status(500).json({ success: false });

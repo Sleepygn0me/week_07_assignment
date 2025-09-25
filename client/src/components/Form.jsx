@@ -1,12 +1,13 @@
 import { useState } from "react";
 
-export default function Form() {
+export default function BuildForm() {
   const [formData, setFormData] = useState({
     buildName: "",
     src: "",
     description: "",
     level: "",
   });
+
   const [status, setStatus] = useState("");
 
   function handleInputChange(event) {
@@ -19,16 +20,13 @@ export default function Form() {
     setStatus("Submitting...");
 
     try {
-      const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/add-builds`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(formData),
-        }
-      );
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/builds`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
 
       if (!response.ok) {
         throw new Error("Server error");
@@ -61,7 +59,6 @@ export default function Form() {
           <label htmlFor="name"> Build Name:</label>
           <input
             type="text"
-            id="buildName"
             name="buildName"
             required
             value={formData.buildName}
@@ -70,7 +67,6 @@ export default function Form() {
           <label htmlFor="src">Image URL:</label>
           <input
             type="text"
-            id="src"
             name="src"
             required
             value={formData.src}
@@ -79,7 +75,6 @@ export default function Form() {
           <label htmlFor="description">Description:</label>
           <input
             type="text"
-            id="description"
             name="description"
             required
             value={formData.description}
@@ -89,7 +84,6 @@ export default function Form() {
           <label htmlFor="level">Level:</label>
           <input
             type="number"
-            id="level"
             name="level"
             required
             value={formData.level}
