@@ -53,16 +53,16 @@ app.get("/builds-users", async (_, res) => {
 //TODO: a route to CREATE data
 app.post("/add-builds", async (req, res) => {
   // const biscuitData = req.body;
-  const { buildName, src, description, level, userId } = req.body;
+  const { buildName, src, description, level } = req.body;
   try {
     const query = await db.query(
-      `INSERT INTO builds (build_name, src, description, level, user_id) VALUES
-      ($1, $2, $3, $4, $5);`,
-      [buildName, src, description, level, userId]
+      `INSERT INTO builds (build_name, src, description, level,) VALUES
+      ($1, $2, $3, $4);`,
+      [buildName, src, description, level]
     );
     res.status(200).json({ success: true });
   } catch (error) {
-    console.error("Error in the add biscuits route", error);
+    console.error("Error in the add builds route", error);
     res.status(500).json({ success: false });
   }
 });

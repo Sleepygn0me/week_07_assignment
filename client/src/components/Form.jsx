@@ -73,7 +73,7 @@ export default function Form() {
             id="src"
             name="src"
             required
-            vlaue={formData.src}
+            value={formData.src}
             onChange={handleInputChange}
           />
           <label htmlFor="description">Description:</label>
@@ -97,7 +97,7 @@ export default function Form() {
           />
         </fieldset>
 
-        <p>curent value is: {formData.buildNamename}</p>
+        <p>curent value is: {formData.buildName}</p>
         <p>current value is: {formData.description}</p>
         <button type="submit">Submit</button>
       </form>
