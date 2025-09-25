@@ -52,13 +52,13 @@ app.get("/builds-users", async (_, res) => {
 
 //TODO: a route to CREATE data
 app.post("/add-builds", async (req, res) => {
-  // const biscuitData = req.body;
   const { buildName, src, description, level, userId } = req.body;
+  console.log("Incoming data:", { buildName, src, description, level, userId });
   try {
     const query = await db.query(
       `INSERT INTO builds (build_name, src, description, level, user_id) VALUES
       ($1, $2, $3, $4, $5);`,
-      [buildName, src, description, Number(level), Number(userId)]
+      [buildName, src, description, level, userId]
     );
     res
       .status(200)

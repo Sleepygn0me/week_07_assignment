@@ -51,12 +51,8 @@ export default function BuildForm() {
           body: JSON.stringify(formData),
         }
       );
-
-      if (!response.ok) {
-        throw new Error("Server error");
-      }
-
       const data = await response.json();
+
       setStatus("Build successfully added!");
       console.log("Server response:", data);
 
@@ -70,7 +66,8 @@ export default function BuildForm() {
       });
     } catch (error) {
       console.error(error);
-      setStatus("Failed to submit build");
+      setStatus("Error in the add builds route", error);
+      setStatus(`Failed to submit build:${error.message}`);
     }
   }
 
