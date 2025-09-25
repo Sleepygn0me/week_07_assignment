@@ -58,7 +58,7 @@ app.post("/add-builds", async (req, res) => {
     const query = await db.query(
       `INSERT INTO builds (build_name, src, description, level, user_id) VALUES
       ($1, $2, $3, $4, $5);`,
-      [buildName, src, description, level, userId]
+      [buildName, src, description, Number(level), Number(userId)]
     );
     res
       .status(200)
