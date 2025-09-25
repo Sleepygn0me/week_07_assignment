@@ -65,7 +65,9 @@ app.post("/add-builds", async (req, res) => {
       .json({ success: true, message: "Build added successfully!" });
   } catch (error) {
     console.error("Error in the add builds route", error);
-    res.status(500).json({ success: false });
+    res
+      .status(500)
+      .json({ success: false, error: error.message, stack: error.stack });
   }
 });
 
