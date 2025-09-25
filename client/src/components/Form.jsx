@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function BuildForm() {
   const [formData, setFormData] = useState({
@@ -10,10 +10,28 @@ export default function BuildForm() {
   });
 
   const [status, setStatus] = useState("");
+  const [builds, setBuilds] = useState([]);
 
   function handleInputChange(event) {
     setFormData({ ...formData, [event.target.name]: event.target.value });
   }
+  useEffect(() => {
+    async function fetchBuilds() {
+      try {
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/builds`);
+        if (!response.ok) {
+          throw new Error("Failed to fetch builds");
+        }
+        const data = await response.json();
+        setBuilds(data);
+      } catch (error) {
+        console.error("Error fetching builds:", error);
+        setStatus("Failed to load builds");
+      }
+    }
+
+    fetchBuilds();
+  }, []);
 
   async function handleSubmit(event) {
     event.preventDefault();
@@ -115,6 +133,17 @@ export default function BuildForm() {
         <button type="submit">Submit</button>
       </form>
       {status && <p aria-live="polite">{status}</p>}
+
+      <h2>Existing Builds</h2>
+      <ul>
+        {builds.map((build, idx) => (
+          <li key={idx}>
+            <strong>{build.build_name}</strong> (Level {build.level})<br />
+            <img src={build.src} alt={build.build_name} width="100" />
+            <p>{build.description}</p>
+          </li>
+        ))}
+      </ul>
     </>
   );
 }
