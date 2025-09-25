@@ -6,6 +6,7 @@ export default function BuildForm() {
     src: "",
     description: "",
     level: "",
+    userId: "",
   });
 
   const [status, setStatus] = useState("");
@@ -20,13 +21,16 @@ export default function BuildForm() {
     setStatus("Submitting...");
 
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/builds`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/add-builds`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        }
+      );
 
       if (!response.ok) {
         throw new Error("Server error");
@@ -42,6 +46,7 @@ export default function BuildForm() {
         src: "",
         description: "",
         level: "",
+        userId: "",
       });
     } catch (error) {
       console.error(error);
@@ -59,6 +64,7 @@ export default function BuildForm() {
           <label htmlFor="name"> Build Name:</label>
           <input
             type="text"
+            id="buildName"
             name="buildName"
             required
             value={formData.buildName}
@@ -67,6 +73,7 @@ export default function BuildForm() {
           <label htmlFor="src">Image URL:</label>
           <input
             type="text"
+            id="src"
             name="src"
             required
             value={formData.src}
@@ -75,6 +82,7 @@ export default function BuildForm() {
           <label htmlFor="description">Description:</label>
           <input
             type="text"
+            id="description"
             name="description"
             required
             value={formData.description}
@@ -84,9 +92,20 @@ export default function BuildForm() {
           <label htmlFor="level">Level:</label>
           <input
             type="number"
+            id="level"
             name="level"
             required
             value={formData.level}
+            onChange={handleInputChange}
+          />
+
+          <label htmlFor="userId">User ID:</label>
+          <input
+            type="number"
+            id="userId"
+            name="userId"
+            required
+            value={formData.userId}
             onChange={handleInputChange}
           />
         </fieldset>

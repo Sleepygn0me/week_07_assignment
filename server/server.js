@@ -26,7 +26,7 @@ app.get("/builds", async (req, res) => {
   //error handling
   //try ... catch
   try {
-    //query the database to send me the biscuits data
+    //query the database to send me the bdata
     //test query in SQL editor first to check syntax
     const data = await db.query(
       `SELECT build_name, src, description, level FROM builds;`
@@ -45,7 +45,7 @@ app.get("/builds-users", async (_, res) => {
     );
     res.json(data.rows);
   } catch (error) {
-    console.error("Error in the biscuits-customers route", error);
+    console.error("Error in the builds-users route", error);
     res.status(500).json({ success: false });
   }
 });
@@ -53,12 +53,12 @@ app.get("/builds-users", async (_, res) => {
 //TODO: a route to CREATE data
 app.post("/add-builds", async (req, res) => {
   // const biscuitData = req.body;
-  const { buildName, src, description, level } = req.body;
+  const { buildName, src, description, level, userId } = req.body;
   try {
     const query = await db.query(
       `INSERT INTO builds (build_name, src, description, level, user_id) VALUES
-      ($1, $2, $3, $4, $1);`,
-      [buildName, src, description, Number(level), userId]
+      ($1, $2, $3, $4, $5);`,
+      [buildName, src, description, Number(level), Number(userId)]
     );
     res
       .status(200)
