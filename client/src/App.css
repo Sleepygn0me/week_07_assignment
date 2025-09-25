@@ -1,2 +1,10 @@
 /*TODO: set up a reset*/
+:root {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  /* declare a variable  --name */
+  --bg-colour: rgba(3, 99, 35, 0.623);
+  --font-header: font-size: 2rem;
+}
 /*? stretch: set up tailwindcss */
