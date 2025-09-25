@@ -19,13 +19,16 @@ export default function Form() {
     setStatus("Submitting...");
 
     try {
-      const response = await fetch(import.meta.env.VITE_WEEK7_API, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/add-builds`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        }
+      );
 
       if (!response.ok) {
         throw new Error("Server error");
