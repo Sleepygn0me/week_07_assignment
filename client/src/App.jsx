@@ -12,10 +12,9 @@ export default function App() {
     <BrowserRouter>
       <Routes>
         {/* Home is the root route */}
-        <Route path="/" element={<Home />}>
-          {/* Form is nested inside Home */}
-          <Route path="form" element={<Form />} />
-        </Route>
+        <Route path="/" element={<Home />} />
+        {/* Form is nested inside Home */}
+        <Route path="/form" element={<Form />} />
       </Routes>
     </BrowserRouter>
   );
