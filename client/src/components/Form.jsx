@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 
+const API_URL = import.meta.env.VITE_WEEK7_API;
+
 export default function BuildForm() {
   const [formData, setFormData] = useState({
     buildName: "",
@@ -19,9 +21,7 @@ export default function BuildForm() {
   useEffect(() => {
     async function fetchBuilds() {
       try {
-        const response = await fetch(
-          "https://week-07-assignment-server.onrender.com/builds"
-        );
+        const response = await fetch(`${API_URL}/builds`);
         if (!response.ok) {
           throw new Error("Failed to fetch builds");
         }
@@ -43,9 +43,7 @@ export default function BuildForm() {
   useEffect(() => {
     async function fetchUsers() {
       try {
-        const response = await fetch(
-          "https://week-07-assignment-server.onrender.com/users"
-        );
+        const response = await fetch(`${API_URL}/users`);
         const data = await response.json();
         setUsers(data);
       } catch (error) {
@@ -66,16 +64,13 @@ export default function BuildForm() {
     setStatus("Submitting...");
 
     try {
-      const response = await fetch(
-        "https://week-07-assignment-server.onrender.com/add-builds",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(formData),
-        }
-      );
+      const response = await fetch(`${API_URL}/add-builds`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
       const data = await response.json();
 
       setStatus("Build successfully added!");
