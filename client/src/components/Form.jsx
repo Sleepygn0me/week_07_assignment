@@ -21,7 +21,9 @@ export default function BuildForm() {
   useEffect(() => {
     async function fetchBuilds() {
       try {
-        const response = await fetch(`${API_URL}/builds`);
+        const response = await fetch(
+          "https://week-07-assignment-server.onrender.com/builds"
+        );
         if (!response.ok) {
           throw new Error("Failed to fetch builds");
         }
@@ -43,7 +45,9 @@ export default function BuildForm() {
   useEffect(() => {
     async function fetchUsers() {
       try {
-        const response = await fetch(`${API_URL}/users`);
+        const response = await fetch(
+          "https://week-07-assignment-server.onrender.com/users"
+        );
         const data = await response.json();
         setUsers(data);
       } catch (error) {
@@ -64,13 +68,16 @@ export default function BuildForm() {
     setStatus("Submitting...");
 
     try {
-      const response = await fetch(`${API_URL}/add-builds`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
+      const response = await fetch(
+        "https://week-07-assignment-server.onrender.com/add-builds",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        }
+      );
       const data = await response.json();
 
       setStatus("Build successfully added!");
