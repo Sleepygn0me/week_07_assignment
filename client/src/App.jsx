@@ -9,10 +9,14 @@ export default function App() {
   //js goes here
 
   return (
-    <>
-      <div className="form-container">
-        <Form />
-      </div>
-    </>
+    <BrowserRouter>
+      <Routes>
+        {/* Home is the root route */}
+        <Route path="/" element={<Home />}>
+          {/* Form is nested inside Home */}
+          <Route path="form" element={<Form />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 }

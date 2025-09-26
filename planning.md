@@ -1,7 +1,6 @@
 ## wirefram
 
--figma
--see the app from the user's pont of view
+w
 
 ## plan your database schema
 
@@ -9,8 +8,6 @@ drawsql
 organise the data to have a clear idea of the data you need to manipulate
 
 ## set up your database table using oyur schema
-
-supabase
 
 ## set up server
 
