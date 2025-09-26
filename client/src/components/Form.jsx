@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
-
+import { Link } from "react-router-dom";
 const API_URL = import.meta.env.VITE_WEEK7_API;
+import "./Form.css";
 
 export default function Form() {
   const [formData, setFormData] = useState({
@@ -99,7 +100,14 @@ export default function Form() {
   }
 
   return (
-    <>
+    <div className="form-container">
+      <div style={{ marginBottom: "20px" }}>
+        <Link to="/">
+          <button style={{ padding: "10px 20px", cursor: "pointer" }}>
+            ← Back to Home
+          </button>
+        </Link>
+      </div>
       <h1>Add New Build Ideas</h1>
       <form onSubmit={handleSubmit}>
         <fieldset>
@@ -176,7 +184,7 @@ export default function Form() {
           </li>
         ))}
       </ul>
-    </>
+    </div>
   );
 }
 

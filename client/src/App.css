@@ -79,7 +79,7 @@ button:hover {
 
 
 
-/ *builds list */
+  /* builds list  */
 ul {
   list-style: none;
   padding: 0;
