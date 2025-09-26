@@ -1,3 +1,9 @@
+Requirements
+Create multiple pages using React Router.
+Display all posts using .map().
+Use an interval and useEffect() to poll your database.
+Design a database schema, and seed the database with some realistic data.
+
 Reflection
 
 Please also provide an assignment reflection in your project README.md file.

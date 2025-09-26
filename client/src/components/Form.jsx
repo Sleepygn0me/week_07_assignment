@@ -34,6 +34,10 @@ export default function BuildForm() {
     }
 
     fetchBuilds();
+    const buildsInterval = setInterval(fetchBuilds, 3000);
+
+    //to avoid intervals stacking every 3 seconds, we neesd to clear it do when  the component updates a fresh inteval is created
+    return () => clearInterval(buildsInterval);
   }, []);
 
   useEffect(() => {
@@ -49,6 +53,11 @@ export default function BuildForm() {
       }
     }
     fetchUsers();
+
+    const usersInterval = setInterval(fetchUsers, 3000);
+
+    //to avoid intervals stacking every 3 seconds, we neesd to clear it do when  the component updates a fresh inteval is created
+    return () => clearInterval(usersInterval);
   }, []);
 
   async function handleSubmit(event) {
