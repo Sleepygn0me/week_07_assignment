@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 
 const API_URL = import.meta.env.VITE_WEEK7_API;
 
-export default function BuildForm() {
+export default function Form() {
   const [formData, setFormData] = useState({
     buildName: "",
     src: "",
